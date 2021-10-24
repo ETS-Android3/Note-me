@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "880057353150",
+    "project_id": "noteme-b283c",
+    "storage_bucket": "noteme-b283c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:880057353150:android:28c36e8839ad6c20052fef",
+        "android_client_info": {
+          "package_name": "com.example.noteme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "880057353150-mpdr49a06opc4maqjkrck4tlpsk4fju2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwxqzOdwoQAQu37zHtFBgQDslC7BXMgBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "880057353150-mpdr49a06opc4maqjkrck4tlpsk4fju2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
