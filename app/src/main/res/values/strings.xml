@@ -6,9 +6,10 @@
     <string name="title_temario">Temario</string>
     <string name="title_examenes">Exámenes</string>
 
+
     <string name="usuarios_registro">Registrarse</string>
-    <string name="usuarios_login">Iniciar sesion:</string>
+    <string name="usuarios_login">Iniciar sesion</string>
     <string name="usuarios_title_password">Contraseña:</string>
-    <string name="usuarios_title_user">Usuario:</string>
-    <string name="usuarios_nocuent">¿No tienes una cuenta? Creala</string>
+    <string name="usuarios_title_mail">Correo:</string>
+    <string name="usuarios_crearCuenta">Crear cuenta</string>
 </resources>
