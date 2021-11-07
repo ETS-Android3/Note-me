@@ -36,23 +36,16 @@ public class RegistroActivity extends AppCompatActivity {
         aw.addValidation(this, R.id.txtPsdRegistro, ".{6}", R.string.PsdError);
         fba = FirebaseAuth.getInstance();
 
-        Correo = findViewById(R.id.txtEmailRegistro);
-        Psd = findViewById(R.id.txtPsdRegistro);
         btnRegistro = findViewById(R.id.btnRegistro);
         btnToLogIn = findViewById(R.id.btnToLogIn);
-
-        btnToLogIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(RegistroActivity.this, LoginActivity.class);
-                startActivity(i);
-            }
-        });
+        Correo = findViewById(R.id.txtEmailRegistro);
+        Psd = findViewById(R.id.txtPsdRegistro);
 
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String mail = Correo.getText().toString(), pass = Psd.getText().toString();
+
                 fba.createUserWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -71,6 +64,14 @@ public class RegistroActivity extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+
+        btnToLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(RegistroActivity.this, LoginActivity.class);
+                startActivity(i);
             }
         });
     }
