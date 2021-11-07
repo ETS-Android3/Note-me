@@ -1,6 +1,9 @@
 package com.example.noteme;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -15,6 +18,7 @@ import com.example.noteme.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    Button btnTemporal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,5 +36,14 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        btnTemporal = findViewById(R.id.btnTemp);
+        btnTemporal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, RegistroActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }

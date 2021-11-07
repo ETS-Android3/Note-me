@@ -12,4 +12,8 @@
     <string name="usuarios_title_password">Contraseña:</string>
     <string name="usuarios_title_mail">Correo:</string>
     <string name="usuarios_crearCuenta">Crear cuenta</string>
+
+
+    <string name="CorreoError">Ingresa un correo valido</string>
+    <string name="PsdError">La contraseña debe de ser mayor a 6 digitos</string>
 </resources>
