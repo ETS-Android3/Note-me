@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (aw.validate()){
                             if (task.isSuccessful()){
                                 Toast.makeText(LoginActivity.this, "Inicio de sesion correcto", Toast.LENGTH_SHORT).show();
-                                // IrAHome();
+                                IrAHome();
                             }
                             else {
                                 String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();

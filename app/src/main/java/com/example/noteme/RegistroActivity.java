@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -53,6 +54,8 @@ public class RegistroActivity extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 Toast.makeText(RegistroActivity.this, "Registro correcto", Toast.LENGTH_SHORT).show();
                                 // finish();
+                                Intent intent = new Intent(RegistroActivity.this, MainActivity.class);
+                                startActivity(intent);
                             }
                             else {
                                 String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
