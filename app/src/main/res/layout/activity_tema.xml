@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.084" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/txtBtn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tema 1"
@@ -30,7 +30,7 @@
         app:layout_constraintVertical_bias="0.252" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/txtBtn3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tema 3"
@@ -41,7 +41,7 @@
         app:layout_constraintVertical_bias="0.375" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/txtBtn4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tema 4"
@@ -52,7 +52,7 @@
         app:layout_constraintVertical_bias="0.438" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/txtBtn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tema 2"
