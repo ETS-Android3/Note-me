@@ -47,26 +47,23 @@ public class RegistroActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String mail = Correo.getText().toString(), pass = Psd.getText().toString();
 
-                fba.createUserWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (aw.validate()){
-                            if (task.isSuccessful()){
-                                Toast.makeText(RegistroActivity.this, "Registro correcto", Toast.LENGTH_SHORT).show();
-                                // finish();
-                                Intent intent = new Intent(RegistroActivity.this, MainActivity.class);
-                                startActivity(intent);
-                            }
-                            else {
-                                String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
-                                dameToastdeerror(errorCode);
-                            }
+                if (aw.validate()){
+                    fba.createUserWithEmailAndPassword(mail, pass).addOnCompleteListener((task) -> {
+                        if (task.isSuccessful()){
+                            Toast.makeText(RegistroActivity.this, "Registro correcto", Toast.LENGTH_SHORT).show();
+                            // finish();
+                            Intent intent = new Intent(RegistroActivity.this, MainActivity.class);
+                            startActivity(intent);
                         }
-                        else{
-                            Toast.makeText(RegistroActivity.this, "Debes completar todos los campos", Toast.LENGTH_SHORT).show();
+                        else {
+                            String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
+                            dameToastdeerror(errorCode);
                         }
-                    }
-                });
+                    });
+                }
+                else{
+                    Toast.makeText(RegistroActivity.this, "Debes completar todos los campos", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

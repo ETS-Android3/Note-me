@@ -53,10 +53,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String mail = Correo.getText().toString(), pass = Psd.getText().toString();
-                fba.signInWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (aw.validate()){
+                if(aw.validate()){
+                    fba.signInWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
                                 Toast.makeText(LoginActivity.this, "Inicio de sesion correcto", Toast.LENGTH_SHORT).show();
                                 IrAHome();
@@ -66,11 +66,8 @@ public class LoginActivity extends AppCompatActivity {
                                 dameToastdeerror(errorCode);
                             }
                         }
-                        else{
-                            Toast.makeText(LoginActivity.this, "Debes completar todos los campos", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                    });
+                }
             }
         });
 
