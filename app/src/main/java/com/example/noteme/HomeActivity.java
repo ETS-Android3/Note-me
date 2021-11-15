@@ -59,21 +59,5 @@ public class HomeActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-//        btnImg1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(HomeActivity.this, TemaActivity.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//        btnImg2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(HomeActivity.this, TemaActivity.class);
-//                startActivity(i);
-//            }
-//        });
     }
 }
