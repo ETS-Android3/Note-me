@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoteMe">
         <activity
+            android:name=".ui.ContentActivity"
+            android:exported="true" />
+        <activity
             android:name=".InfoTemaActivity"
             android:exported="true" />
         <activity

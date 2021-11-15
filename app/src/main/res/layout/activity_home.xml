@@ -6,66 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <TextView
-        android:id="@+id/txtCampo1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Programacion"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.174" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txtCampo2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="¡Selecciona un tema!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.094" />
+        <TextView
+            android:id="@+id/txtCampo2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="¡Selecciona un tema!"
+            android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/txtCampo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Programacion"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.544" />
-
-    <ImageButton
-        android:id="@+id/btnImg1"
-        android:layout_width="161dp"
-        android:layout_height="173dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256"
-        app:srcCompat="@drawable/c_logo" />
-
-    <ImageButton
-        android:id="@+id/btnImg2"
-        android:layout_width="161dp"
-        android:layout_height="174dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.728"
-        app:srcCompat="@drawable/mathlogo" />
+        <ListView
+            android:layout_width="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCampo2"
+            tools:listitem="@layout/topic_item"
+            android:id="@+id/topicListView"
+            android:layout_marginTop="20dp" android:layout_height="match_parent"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

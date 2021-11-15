@@ -52,7 +52,7 @@ public class RegistroActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
                             Toast.makeText(RegistroActivity.this, "Registro correcto", Toast.LENGTH_SHORT).show();
                             // finish();
-                            Intent intent = new Intent(RegistroActivity.this, MainActivity.class);
+                            Intent intent = new Intent(RegistroActivity.this, HomeActivity.class);
                             startActivity(intent);
                         }
                         else {

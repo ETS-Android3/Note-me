@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +14,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.noteme.R;
+import com.example.noteme.Topic;
+import com.example.noteme.TopicListAdapter;
 import com.example.noteme.databinding.FragmentDashboardBinding;
+
+import java.util.ArrayList;
 
 public class DashboardFragment extends Fragment {
 
@@ -28,13 +33,12 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        ArrayList<Topic> topics = new ArrayList<>();
+
+        topics.add(new Topic("Algoritmos"));
+        topics.add(new Topic("estructuras de datos"));
+        TopicListAdapter tla = new TopicListAdapter(this.getContext(), topics);
+
         return root;
     }
 

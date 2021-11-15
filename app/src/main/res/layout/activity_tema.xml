@@ -7,7 +7,7 @@
     tools:context=".TemaActivity">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tema"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nombre de la seccion"

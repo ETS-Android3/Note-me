@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.example.noteme.ui.ContentActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
@@ -81,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void IrAHome(){
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, HomeActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }
