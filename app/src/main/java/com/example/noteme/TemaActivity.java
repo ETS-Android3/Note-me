@@ -22,7 +22,6 @@ import java.util.ArrayList;
 
 public class TemaActivity extends AppCompatActivity {
 
-    TextView txtTopic;
     Intent baseIntent;
     String topic;
 
