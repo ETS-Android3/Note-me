@@ -10,7 +10,7 @@
 
 
     <TextView
-        android:id="@+id/txtTema"
+        android:id="@+id/txtTema___"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
@@ -26,6 +26,7 @@
         app:layout_constraintVertical_bias="0.084" />
 
     <ListView
+        android:id="@+id/subtopicListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/subtopic_item" />

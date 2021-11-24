@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.example.noteme.databinding.ActivityHomeBinding;
+import com.example.noteme.databinding.ActivityTemaBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,23 +26,21 @@ public class TemaActivity extends AppCompatActivity {
     Intent baseIntent;
     String topic;
 
-    ActivityHomeBinding binding;
+    ActivityTemaBinding binding;
     FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        binding = ActivityTemaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         baseIntent = getIntent();
         topic = baseIntent.getStringExtra("tema");
 
         Log.d("->", "Before find");
-        txtTopic = findViewById(R.id.txtTema);
-        Log.d("->", "Before set " + topic + " to " + txtTopic.toString());
-        txtTopic.setText(topic);
+        binding.txtTema.setText(topic);
         Log.d("->", "After set");
 
         // Load the data
@@ -56,19 +55,23 @@ public class TemaActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             for (QueryDocumentSnapshot doc: task.getResult()) {
-                                subtopicArrayList.add(new Subtopic(doc.get("nombre").toString()));
+                                String a = "subtema";
+                                if (doc.contains(a)) {
+                                    subtopicArrayList.add(new Subtopic(doc.get(a).toString()));
+                                }
                             }
 
                             SubtopicListAdapter tla = new SubtopicListAdapter(TemaActivity.this, subtopicArrayList);
-                            binding.topicListView.setAdapter(tla);
-                            binding.topicListView.setClickable(true);
-                            binding.topicListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            binding.subtopicListView.setAdapter(tla);
+                            binding.subtopicListView.setClickable(true);
+                            binding.subtopicListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                                    Topic t = (Topic) adapterView.getItemAtPosition(i);
-//                                    Intent intent = new Intent(TemaActivity.this, TemaActivity.class);
-//                                    intent.putExtra("tema", t.name);
-//                                    startActivity(intent);
+                                    Subtopic t = (Subtopic) adapterView.getItemAtPosition(i);
+                                    Intent intent = new Intent(TemaActivity.this, InfoTemaActivity.class);
+                                    intent.putExtra("tema", topic);
+                                    intent.putExtra("subtema", t.name);
+                                    startActivity(intent);
                                 }
                             });
                         }
