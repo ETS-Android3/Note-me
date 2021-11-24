@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.example.noteme.ui.ContentActivity;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
@@ -63,8 +64,9 @@ public class LoginActivity extends AppCompatActivity {
                                 IrAHome();
                             }
                             else {
-                                String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
-                                dameToastdeerror(errorCode);
+                                Toast.makeText(LoginActivity.this, "User Authentication Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                                String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
+//                                dameToastdeerror(errorCode);
                             }
                         }
                     });

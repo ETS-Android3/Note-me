@@ -56,8 +56,10 @@ public class RegistroActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                         else {
-                            String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
-                            dameToastdeerror(errorCode);
+                            Toast.makeText(RegistroActivity.this, "User Authentication Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+//                            String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
+//                            dameToastdeerror(errorCode);
                         }
                     });
                 }
