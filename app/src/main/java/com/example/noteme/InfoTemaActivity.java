@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,11 +23,13 @@ public class InfoTemaActivity extends AppCompatActivity {
     String tema;
     String subtema;
     FirebaseFirestore db;
+    Button btnExamen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_tema);
+        btnExamen = findViewById(R.id.btnExamen);
 
         bintent = getIntent();
         tema = bintent.getStringExtra("tema");
@@ -54,6 +57,12 @@ public class InfoTemaActivity extends AppCompatActivity {
                         }
                     }
                 });
-
+        btnExamen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(InfoTemaActivity.this, TestsActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }
