@@ -62,6 +62,8 @@ public class InfoTemaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(InfoTemaActivity.this, TestsActivity.class);
+                i.putExtra("tema", tema);
+                i.putExtra("subtema", subtema);
                 startActivity(i);
             }
         });
