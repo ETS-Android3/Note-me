@@ -47,7 +47,7 @@ public class InfoTemaActivity extends AppCompatActivity {
 
                             for (QueryDocumentSnapshot doc: task.getResult()) {
                                 String a = "dato";
-                                Log.d("dato", doc.getData().toString());
+
                                 if (doc.contains(a)) {
                                     String informacion = doc.getString(a);
                                     ((TextView) findViewById(R.id.tituloSeccion)).setText(subtema);
@@ -57,6 +57,7 @@ public class InfoTemaActivity extends AppCompatActivity {
                         }
                     }
                 });
+
         btnExamen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
