@@ -28,7 +28,9 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.38177083333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_registro.xml" value="0.38177083333333334" />
+        <entry key="app/src/main/res/layout/activity_score.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_tema.xml" value="0.38177083333333334" />
+        <entry key="app/src/main/res/layout/activity_tests.xml" value="0.38177083333333334" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.38125" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.38177083333333334" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.38125" />
