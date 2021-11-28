@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,6 +21,14 @@ public class ScoreActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+        // Hide the action bar
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
@@ -40,9 +50,8 @@ public class ScoreActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             for (QueryDocumentSnapshot doc: task.getResult()) {
-                                Long score = doc.getLong("score");
-                                TextView txtScore = findViewById(R.id.txtScore);
-                                txtScore.setText("Tu puntaje actual es: " + Long.toString(score));
+                                Long prevscore = doc.getLong("score");
+                                doc.getReference().update("score", score + prevscore);
                             }
                         }
                     }

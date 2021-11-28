@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,6 +28,14 @@ public class InfoTemaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+        // Hide the action bar
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_tema);
         btnExamen = findViewById(R.id.btnExamen);
@@ -51,7 +60,7 @@ public class InfoTemaActivity extends AppCompatActivity {
                                 if (doc.contains(a)) {
                                     String informacion = doc.getString(a);
                                     ((TextView) findViewById(R.id.tituloSeccion)).setText(subtema);
-                                    ((TextView) findViewById(R.id.contenidoSeccion)).setText(informacion);
+                                    ((TextView) findViewById(R.id.contenidoSeccion)).setText(informacion.replace(".", ".\n"));
                                 }
                             }
                         }

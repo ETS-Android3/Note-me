@@ -2,6 +2,7 @@ package com.example.noteme;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -38,6 +40,14 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+        // Hide the action bar
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -77,8 +87,27 @@ public class LoginActivity extends AppCompatActivity {
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this, RegistroActivity.class);
-                startActivity(i);
+                String mail = Correo.getText().toString(), pass = Psd.getText().toString();
+
+                if (aw.validate()){
+                    fba.createUserWithEmailAndPassword(mail, pass).addOnCompleteListener((task) -> {
+                        if (task.isSuccessful()){
+                            Toast.makeText(LoginActivity.this, "Registro correcto", Toast.LENGTH_SHORT).show();
+                            // finish();
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            Toast.makeText(LoginActivity.this, "User Authentication Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+//                            String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
+//                            dameToastdeerror(errorCode);
+                        }
+                    });
+                }
+                else{
+                    Toast.makeText(LoginActivity.this, "Debes completar todos los campos", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
