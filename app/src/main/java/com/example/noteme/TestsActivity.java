@@ -20,6 +20,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.IntStream;
 
 
 class Pregunta {
@@ -48,17 +50,52 @@ public class TestsActivity extends AppCompatActivity {
     // preguntas
     Integer currentQuestion = 1, puntos = 0;
 
+    String correcta;
     protected void showQuestion(Integer npreg) {
         Pregunta preg = preguntas.get(npreg - 1);
         lblPregunta.setText(preg.pregunta);
-        lblResp1.setText(preg.respuesta);
-        lblResp2.setText(preg.relleno1);
-        lblResp3.setText(preg.relleno2);
+
+        String[] respustas = {
+            preg.respuesta,
+            preg.relleno1,
+            preg.relleno2
+        };
+        correcta = respustas[0];
+
+        int[] numerosAleatorios = IntStream.rangeClosed(0, 2).toArray();
+        //desordenando los elementos
+        Random r = new Random();
+        for (int i = numerosAleatorios.length; i > 0; i--) {
+            int posicion = r.nextInt(i);
+            int tmp = numerosAleatorios[i-1];
+            numerosAleatorios[i - 1] = numerosAleatorios[posicion];
+            numerosAleatorios[posicion] = tmp;
+        }
+
+        lblResp1.setText(respustas[numerosAleatorios[0]]);
+        lblResp2.setText(respustas[numerosAleatorios[1]]);
+        lblResp3.setText(respustas[numerosAleatorios[2]]);
+
         lblCounter.setText(currentQuestion.toString() + "/" + Long.toString(preguntas.stream().count()));
     }
 
     protected int getQuestionValue() {
-        return lblResp1.isChecked() ? 1 : 0;
+        if (lblResp1.isChecked()){
+            if (lblResp1.getText() == correcta){
+                return 1;
+            }
+        }
+        else if (lblResp2.isChecked()){
+            if (lblResp2.getText() == correcta){
+                return 1;
+            }
+        }
+        else {
+            if (lblResp3.getText() == correcta){
+                return 1;
+            }
+        }
+        return 0;
     }
 
     @Override
@@ -100,7 +137,6 @@ public class TestsActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-
                             for (QueryDocumentSnapshot doc: task.getResult()) {
                                 preguntas.add(new Pregunta(
                                             doc.getString("pregunta"),
@@ -115,8 +151,6 @@ public class TestsActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
 
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
