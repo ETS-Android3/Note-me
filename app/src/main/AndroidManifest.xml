@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoteMe">
         <activity
+            android:name=".CheckBoxActivity"
+            android:exported="true" />
+        <activity
             android:name=".ScoreActivity"
             android:exported="true" />
         <activity
@@ -31,8 +34,7 @@
             android:exported="true" />
         <activity
             android:name=".RegistroActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".LoginActivity"
             android:exported="true">

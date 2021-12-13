@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
-
 
 class Pregunta {
     String pregunta;
@@ -46,7 +47,9 @@ public class TestsActivity extends AppCompatActivity {
     String tema, subtema;
     TextView lblTema, lblPregunta, lblCounter;
     RadioButton lblResp1, lblResp2, lblResp3;
+    CheckBox cbResp1, cbResp2, cbResp3;
     List<Pregunta> preguntas;
+    RadioGroup checkGroup, radioGroup;
     // preguntas
     Integer currentQuestion = 1, puntos = 0;
 
@@ -75,6 +78,10 @@ public class TestsActivity extends AppCompatActivity {
         lblResp1.setText(respustas[numerosAleatorios[0]]);
         lblResp2.setText(respustas[numerosAleatorios[1]]);
         lblResp3.setText(respustas[numerosAleatorios[2]]);
+
+        cbResp1.setText(respustas[numerosAleatorios[0]]);
+        cbResp2.setText(respustas[numerosAleatorios[1]]);
+        cbResp3.setText(respustas[numerosAleatorios[2]]);
 
         lblCounter.setText(currentQuestion.toString() + "/" + Long.toString(preguntas.stream().count()));
     }
@@ -116,7 +123,16 @@ public class TestsActivity extends AppCompatActivity {
         lblResp1 = findViewById(R.id.lblRespuesta1);
         lblResp2 = findViewById(R.id.lblRespuesta2);
         lblResp3 = findViewById(R.id.lblRespuesta3);
+
+        cbResp1 = findViewById(R.id.cbRespuesta1);
+        cbResp2 = findViewById(R.id.cbRespuesta2);
+        cbResp3 = findViewById(R.id.cbRespuesta3);
+
         lblCounter = findViewById(R.id.lblCounter);
+        radioGroup = findViewById(R.id.radioGroup);
+        checkGroup = findViewById(R.id.checkGroup);
+
+        radioGroup.setVisibility(View.INVISIBLE);
 
         lblTema = findViewById(R.id.lblTema);
         preguntas = new ArrayList<Pregunta>();
@@ -162,7 +178,6 @@ public class TestsActivity extends AppCompatActivity {
                     Intent i = new Intent(TestsActivity.this, ScoreActivity.class);
                     i.putExtra("score", puntos);
                     startActivity(i);
-
                 } else {
                     currentQuestion += 1;
                     showQuestion(currentQuestion);
