@@ -30,12 +30,14 @@ class Pregunta {
     String respuesta;
     String relleno1;
     String relleno2;
+    String tipo;
 
-    public Pregunta(String pregunta, String respuesta, String relleno1, String relleno2) {
+    public Pregunta(String pregunta, String respuesta, String relleno1, String relleno2, String tipo) {
         this.pregunta = pregunta;
         this.respuesta = respuesta;
         this.relleno1 = relleno1;
         this.relleno2 = relleno2;
+        this.tipo = tipo;
     }
 }
 
@@ -53,10 +55,12 @@ public class TestsActivity extends AppCompatActivity {
     // preguntas
     Integer currentQuestion = 1, puntos = 0;
 
-    String correcta;
+    String correcta, tipo;
     protected void showQuestion(Integer npreg) {
         Pregunta preg = preguntas.get(npreg - 1);
         lblPregunta.setText(preg.pregunta);
+
+        tipo = preg.tipo;
 
         String[] respustas = {
             preg.respuesta,
@@ -75,6 +79,20 @@ public class TestsActivity extends AppCompatActivity {
             numerosAleatorios[posicion] = tmp;
         }
 
+        if (preg.tipo == null){
+            preg.tipo = "";
+        }
+        Log.d("---->", "tipo:" + preg.tipo);
+
+        if (preg.tipo.equals("cb")){
+            radioGroup.setVisibility(View.INVISIBLE);
+            checkGroup.setVisibility(View.VISIBLE);
+        }
+        else {
+            radioGroup.setVisibility(View.VISIBLE);
+            checkGroup.setVisibility(View.INVISIBLE);
+        }
+
         lblResp1.setText(respustas[numerosAleatorios[0]]);
         lblResp2.setText(respustas[numerosAleatorios[1]]);
         lblResp3.setText(respustas[numerosAleatorios[2]]);
@@ -83,23 +101,55 @@ public class TestsActivity extends AppCompatActivity {
         cbResp2.setText(respustas[numerosAleatorios[1]]);
         cbResp3.setText(respustas[numerosAleatorios[2]]);
 
+        lblResp1.setChecked(false);
+        lblResp2.setChecked(false);
+        lblResp3.setChecked(false);;
+
+        cbResp1.setChecked(false);
+        cbResp2.setChecked(false);
+        cbResp3.setChecked(false);
+
         lblCounter.setText(currentQuestion.toString() + "/" + Long.toString(preguntas.stream().count()));
     }
 
     protected int getQuestionValue() {
-        if (lblResp1.isChecked()){
-            if (lblResp1.getText() == correcta){
-                return 1;
-            }
+        if (tipo == null){
+            tipo = "";
         }
-        else if (lblResp2.isChecked()){
-            if (lblResp2.getText() == correcta){
-                return 1;
+        Log.d("---->", "tipo2:" + tipo);
+
+        if (tipo.equals("cb")){
+            if (cbResp1.isChecked() && !cbResp2.isChecked() && !cbResp3.isChecked()){
+                if (cbResp1.getText() == correcta){
+                    return 1;
+                }
+            }
+            else if (cbResp2.isChecked() && !cbResp1.isChecked() && !cbResp3.isChecked()){
+                if (cbResp2.getText() == correcta){
+                    return 1;
+                }
+            }
+            else if (cbResp3.isChecked() && !cbResp1.isChecked() && !cbResp2.isChecked()){
+                if (cbResp3.getText() == correcta){
+                    return 1;
+                }
             }
         }
         else {
-            if (lblResp3.getText() == correcta){
-                return 1;
+            if (lblResp1.isChecked()){
+                if (lblResp1.getText() == correcta){
+                    return 1;
+                }
+            }
+            else if (lblResp2.isChecked()){
+                if (lblResp2.getText() == correcta){
+                    return 1;
+                }
+            }
+            else {
+                if (lblResp3.getText() == correcta){
+                    return 1;
+                }
             }
         }
         return 0;
@@ -107,6 +157,8 @@ public class TestsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        tipo = "";
+
         View decorView = getWindow().getDecorView();
         // Hide the status bar.
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
@@ -132,8 +184,6 @@ public class TestsActivity extends AppCompatActivity {
         radioGroup = findViewById(R.id.radioGroup);
         checkGroup = findViewById(R.id.checkGroup);
 
-        radioGroup.setVisibility(View.INVISIBLE);
-
         lblTema = findViewById(R.id.lblTema);
         preguntas = new ArrayList<Pregunta>();
 
@@ -158,9 +208,11 @@ public class TestsActivity extends AppCompatActivity {
                                             doc.getString("pregunta"),
                                             doc.getString("respuesta"),
                                             doc.getString("relleno1"),
-                                            doc.getString("relleno2")
+                                            doc.getString("relleno2"),
+                                            doc.getString("tipo")
                                         )
                                 );
+
                             }
                             // Lo demas
                             showQuestion(currentQuestion);
@@ -184,5 +236,4 @@ public class TestsActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-}
+    }}

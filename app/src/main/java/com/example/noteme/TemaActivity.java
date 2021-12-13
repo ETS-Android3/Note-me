@@ -47,9 +47,7 @@ public class TemaActivity extends AppCompatActivity {
         baseIntent = getIntent();
         topic = baseIntent.getStringExtra("tema");
 
-        Log.d("->", "Before find");
         binding.txtTema.setText(topic);
-        Log.d("->", "After set");
 
         // Load the data
         ArrayList<Subtopic> subtopicArrayList = new ArrayList<>();
