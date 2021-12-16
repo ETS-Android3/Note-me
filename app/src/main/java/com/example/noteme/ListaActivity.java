@@ -46,10 +46,6 @@ public class ListaActivity extends AppCompatActivity {
         binding = ActivityListaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        baseIntent = getIntent();
-        topic = baseIntent.getStringExtra("tema");
-        binding.txtTema.setText(topic);
-
         // Load the data
         db = FirebaseFirestore.getInstance();
         ArrayList<Subtopic> subtopicArrayList = new ArrayList<>();
@@ -62,8 +58,7 @@ public class ListaActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot doc: task.getResult()) {
-                                Log.d("-->", doc.toString());
-                                subtopicArrayList.add(new Subtopic(doc.getString("email") + "  [" + Integer.toString(doc.getLong("score").intValue()) + "]"));
+                                subtopicArrayList.add(new Subtopic(doc.getString("email").split("@")[0] + "  [" + Integer.toString(doc.getLong("score").intValue()) + "]"));
                             }
                             SubtopicListAdapter tla = new SubtopicListAdapter(ListaActivity.this, subtopicArrayList);
                             binding.subtopicListView.setAdapter(tla);
