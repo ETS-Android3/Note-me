@@ -25,6 +25,8 @@
         <entry key="app/src/main/res/layout/activity_content.xml" value="0.20052083333333334" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.38177083333333334" />
         <entry key="app/src/main/res/layout/activity_info_tema.xml" value="0.38177083333333334" />
+        <entry key="app/src/main/res/layout/activity_leaderboard.xml" value="0.29375" />
+        <entry key="app/src/main/res/layout/activity_lista.xml" value="0.38177083333333334" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.38177083333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_registro.xml" value="0.38177083333333334" />
@@ -36,6 +38,7 @@
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.38125" />
         <entry key="app/src/main/res/layout/subtopic_item.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/topic_item.xml" value="0.3723958333333333" />
+        <entry key="app/src/main/res/layout/user_item.xml" value="0.29375" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.38125" />
       </map>
     </option>

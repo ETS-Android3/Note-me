@@ -1,24 +1,35 @@
 package com.example.noteme;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.Button;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.TextView;
-
+import com.example.noteme.databinding.ActivityListaBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class ScoreActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class ListaActivity extends AppCompatActivity {
+
+    Intent baseIntent;
+    String topic;
+
+    ActivityListaBinding binding;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,38 +42,40 @@ public class ScoreActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_score);
 
-        Intent bintent = getIntent();
-        Integer score = bintent.getIntExtra("score", 0);
-        TextView lblScore = findViewById(R.id.lblScore);
-        lblScore.setText("Conseguiste " + score.toString() + " puntos!!");
+        binding = ActivityListaBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
+        baseIntent = getIntent();
+        topic = baseIntent.getStringExtra("tema");
+        binding.txtTema.setText(topic);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseFirestore db;
+        // Load the data
         db = FirebaseFirestore.getInstance();
+        ArrayList<Subtopic> subtopicArrayList = new ArrayList<>();
+
         db.collection("scores")
-                .whereEqualTo("user", user.getUid())
+                .orderBy("score", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-
                             for (QueryDocumentSnapshot doc: task.getResult()) {
-                                Long prevscore = doc.getLong("score");
-                                doc.getReference().update("score", score + prevscore);
+                                Log.d("-->", doc.toString());
+                                subtopicArrayList.add(new Subtopic(doc.getString("email") + "  [" + Integer.toString(doc.getLong("score").intValue()) + "]"));
                             }
+                            SubtopicListAdapter tla = new SubtopicListAdapter(ListaActivity.this, subtopicArrayList);
+                            binding.subtopicListView.setAdapter(tla);
                         }
                     }
                 });
 
-        Button bye = findViewById(R.id.byebutton);
-        bye.setOnClickListener(new View.OnClickListener() {
+        Button btn = findViewById(R.id.button3);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ScoreActivity.this, ListaActivity.class);
+                Intent intent = new Intent(ListaActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
