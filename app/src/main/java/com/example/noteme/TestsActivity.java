@@ -27,14 +27,16 @@ import java.util.stream.IntStream;
 
 class Pregunta {
     String pregunta;
-    String respuesta;
+    String respuesta1;
+    String respuesta2;
     String relleno1;
     String relleno2;
     String tipo;
 
-    public Pregunta(String pregunta, String respuesta, String relleno1, String relleno2, String tipo) {
+    public Pregunta(String pregunta, String respuesta1, String respuesta2, String relleno1, String relleno2, String tipo) {
         this.pregunta = pregunta;
-        this.respuesta = respuesta;
+        this.respuesta1 = respuesta1;
+        this.respuesta2 = respuesta2;
         this.relleno1 = relleno1;
         this.relleno2 = relleno2;
         this.tipo = tipo;
@@ -55,19 +57,16 @@ public class TestsActivity extends AppCompatActivity {
     // preguntas
     Integer currentQuestion = 1, puntos = 0;
 
-    String correcta, tipo;
+    String tipo;
+    String[] correctas;
     protected void showQuestion(Integer npreg) {
         Pregunta preg = preguntas.get(npreg - 1);
         lblPregunta.setText(preg.pregunta);
 
         tipo = preg.tipo;
-
-        String[] respustas = {
-            preg.respuesta,
-            preg.relleno1,
-            preg.relleno2
-        };
-        correcta = respustas[0];
+        if (preg.tipo == null){
+            preg.tipo = "";
+        }
 
         int[] numerosAleatorios = IntStream.rangeClosed(0, 2).toArray();
         //desordenando los elementos
@@ -79,16 +78,28 @@ public class TestsActivity extends AppCompatActivity {
             numerosAleatorios[posicion] = tmp;
         }
 
-        if (preg.tipo == null){
-            preg.tipo = "";
-        }
-        Log.d("---->", "tipo:" + preg.tipo);
+        String[] respustas;
+        respustas = new String[3];
+        correctas = new String[2];
 
         if (preg.tipo.equals("cb")){
+            respustas[0] = preg.respuesta1;
+            respustas[1] = preg.respuesta2;
+            respustas[2] = preg.relleno1;
+
+            correctas[0] = preg.respuesta1;
+            correctas[1] = preg.respuesta2;
+
             radioGroup.setVisibility(View.INVISIBLE);
             checkGroup.setVisibility(View.VISIBLE);
         }
         else {
+            respustas[0] = preg.respuesta1;
+            respustas[1] = preg.relleno1;
+            respustas[2] = preg.relleno2;
+
+            correctas[0] = preg.respuesta1;
+
             radioGroup.setVisibility(View.VISIBLE);
             checkGroup.setVisibility(View.INVISIBLE);
         }
@@ -103,7 +114,7 @@ public class TestsActivity extends AppCompatActivity {
 
         lblResp1.setChecked(false);
         lblResp2.setChecked(false);
-        lblResp3.setChecked(false);;
+        lblResp3.setChecked(false);
 
         cbResp1.setChecked(false);
         cbResp2.setChecked(false);
@@ -119,35 +130,35 @@ public class TestsActivity extends AppCompatActivity {
         Log.d("---->", "tipo2:" + tipo);
 
         if (tipo.equals("cb")){
-            if (cbResp1.isChecked() && !cbResp2.isChecked() && !cbResp3.isChecked()){
-                if (cbResp1.getText() == correcta){
+            if (cbResp1.isChecked() && cbResp2.isChecked() && !cbResp3.isChecked()){
+                if (cbResp1.getText() == correctas[0] || cbResp1.getText() == correctas[1] && cbResp2.getText() == correctas[0] || cbResp2.getText() == correctas[1]){
                     return 1;
                 }
             }
-            else if (cbResp2.isChecked() && !cbResp1.isChecked() && !cbResp3.isChecked()){
-                if (cbResp2.getText() == correcta){
+            else if (cbResp1.isChecked() && cbResp3.isChecked() && !cbResp2.isChecked()){
+                if (cbResp1.getText() == correctas[0] || cbResp1.getText() == correctas[1] && cbResp3.getText() == correctas[0] || cbResp3.getText() == correctas[1]){
                     return 1;
                 }
             }
-            else if (cbResp3.isChecked() && !cbResp1.isChecked() && !cbResp2.isChecked()){
-                if (cbResp3.getText() == correcta){
+            else if (cbResp2.isChecked() && cbResp3.isChecked() && !cbResp1.isChecked()){
+                if (cbResp2.getText() == correctas[0] || cbResp2.getText() == correctas[1] && cbResp3.getText() == correctas[0] || cbResp3.getText() == correctas[1]){
                     return 1;
                 }
             }
         }
         else {
             if (lblResp1.isChecked()){
-                if (lblResp1.getText() == correcta){
+                if (lblResp1.getText() == correctas[0]){
                     return 1;
                 }
             }
             else if (lblResp2.isChecked()){
-                if (lblResp2.getText() == correcta){
+                if (lblResp2.getText() == correctas[0]){
                     return 1;
                 }
             }
             else {
-                if (lblResp3.getText() == correcta){
+                if (lblResp3.getText() == correctas[0]){
                     return 1;
                 }
             }
@@ -206,7 +217,8 @@ public class TestsActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot doc: task.getResult()) {
                                 preguntas.add(new Pregunta(
                                             doc.getString("pregunta"),
-                                            doc.getString("respuesta"),
+                                            doc.getString("respuesta1"),
+                                            doc.getString("respuesta2"),
                                             doc.getString("relleno1"),
                                             doc.getString("relleno2"),
                                             doc.getString("tipo")
