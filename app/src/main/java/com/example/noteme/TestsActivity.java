@@ -131,17 +131,17 @@ public class TestsActivity extends AppCompatActivity {
 
         if (tipo.equals("cb")){
             if (cbResp1.isChecked() && cbResp2.isChecked() && !cbResp3.isChecked()){
-                if (cbResp1.getText() == correctas[0] || cbResp1.getText() == correctas[1] && cbResp2.getText() == correctas[0] || cbResp2.getText() == correctas[1]){
+                if ((cbResp1.getText() == correctas[0] || cbResp1.getText() == correctas[1]) && (cbResp2.getText() == correctas[0] || cbResp2.getText() == correctas[1])){
                     return 1;
                 }
             }
             else if (cbResp1.isChecked() && cbResp3.isChecked() && !cbResp2.isChecked()){
-                if (cbResp1.getText() == correctas[0] || cbResp1.getText() == correctas[1] && cbResp3.getText() == correctas[0] || cbResp3.getText() == correctas[1]){
+                if ((cbResp1.getText() == correctas[0] || cbResp1.getText() == correctas[1]) && (cbResp3.getText() == correctas[0] || cbResp3.getText() == correctas[1])){
                     return 1;
                 }
             }
             else if (cbResp2.isChecked() && cbResp3.isChecked() && !cbResp1.isChecked()){
-                if (cbResp2.getText() == correctas[0] || cbResp2.getText() == correctas[1] && cbResp3.getText() == correctas[0] || cbResp3.getText() == correctas[1]){
+                if ((cbResp2.getText() == correctas[0] || cbResp2.getText() == correctas[1]) && (cbResp3.getText() == correctas[0] || cbResp3.getText() == correctas[1])){
                     return 1;
                 }
             }
